@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meow Facts!</title>
+</head>
+
+<body>
+    <h1>Tap to meow facts!</h1>
+    <div class="content">
+        <div class="control">
+            <button onclick="getFact()">Meow!</button>
+        </div>
+        <div class="facts">
+            <p id="text-fact"></p>
+        </div>
+    </div>
+
+</body>
+<script>
+    const api_url = "https://meowfacts.herokuapp.com/";
+
+    async function getFact() {
+
+        const response = await fetch(api_url);
+
+        const fact = await response.json();
+
+        const tect = fact.data[0];
+
+        document.getElementById("text-fact").innerHTML = tect;
+    }
+</script>
+
+</html>

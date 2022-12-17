@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feriados</title>
+</head>
+
+<body>
+    <div class="content">
+        <h1>Hi!</h1>
+        <div class="search">
+            <input type="text" id="ano">
+            <button onclick="getHoliday()">Verificar!</button>
+        </div>
+        <div id="feriados">
+        </div>
+    </div>
+
+</body>
+<script>
+    const api_url = "https://brasilapi.com.br/api/feriados/v1/";
+
+    async function getHoliday() {
+
+        let year = document.getElementById("ano").value;
+        let url = `${api_url}${year}`;
+
+        const response = await fetch(url);
+
+        const data = await response.json();
+
+        feriados.innerHTML = "";
+
+        for (let n = 0; n < data.length; n++) {
+            let { date, name, type } = data[n];
+
+
+            feriados.innerHTML += `
+                <table>
+                    <tr>
+                        <td>${n+1} - Data: </td>
+                        <td><span id="date${n}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Feriado: </td>
+                        <td><span id="name${n}"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Tipo: </td>
+                        <td><span id="type${n}"></span></td>
+                    </tr>
+                </table>
+                <br />
+                <hr />
+                            `;
+
+            document.querySelector(`#date${n}`).textContent = date;
+            document.querySelector(`#name${n}`).textContent = name;
+            document.querySelector(`#type${n}`).textContent = type;
+        }
+
+    }
+</script>
+
+</html>

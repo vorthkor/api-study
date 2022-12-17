@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CatAsAService</title>
+</head>
+<body>
+    <h1>Hi</h1>
+    <div class="content">
+        <div id="cat-img"></div>
+    </div>
+    
+</body>
+<script>
+    const api_url = "https://cataas.com/cat?json=true";
+    const url = "https://cataas.com";
+    async function getCat() {
+
+        //Making API request and getting response
+        const response = await fetch(api_url);
+
+        //Parsing to JSON
+        const data = await response.json();
+
+        //retrieving data
+        const cat = data;
+        let iurl = cat.url;
+        let image = `${url}${iurl}`;
+        // console.log(image);
+
+        //Creates elements
+        let img = document.createElement("img");
+        let img_div = document.getElementById("cat-img");
+        img.src = image;
+        img_div.append(img);
+
+    }
+    getCat();
+</script>
+</html>
