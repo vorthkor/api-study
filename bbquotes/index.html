@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Say my name</title>
+</head>
+<body>
+    <h1>Heisenberg!</h1>
+    <div class="content">
+        <div id="quote"></div>
+        <div id="author"></div>
+    </div>
+    
+</body>
+<script>
+    const api_url = "https://api.breakingbadquotes.xyz/v1/quotes";
+    
+    async function getQuote() {
+        const response = await fetch(api_url);
+
+        const data = await response.json();
+        
+        let quote = data[0].quote;
+        let author = data[0].author;
+
+        document.getElementById("quote").innerHTML = quote;
+        document.getElementById("author").innerHTML = author;
+
+    }
+    getQuote()
+</script>
+</html>
