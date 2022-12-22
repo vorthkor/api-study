@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMDb</title>
+</head>
+
+<body>
+    <h1>Movies!</h1>
+    <div class="content">
+        <div id="title"></div>
+        <div id="year"></div>
+
+    </div>
+
+</body>
+<script>
+    const api_key = "141ff85d";
+    const api_url = `http://www.omdbapi.com/?t=star+wars&apikey=${api_key}`;
+
+    async function getMovie() {
+        const response = await fetch(api_url);
+
+        const data = await response.json();
+
+        // console.log(data);
+
+        let title = data.Title;
+        let year = data.Year;
+
+
+        document.getElementById("title").innerHTML = title;
+        document.getElementById("year").innerHTML = year;
+
+    }
+    getMovie()
+</script>
+
+</html>
